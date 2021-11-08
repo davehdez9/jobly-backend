@@ -22,6 +22,11 @@ app.use(express.json());
 app.use(morgan("tiny"));
 app.use(authenticateJWT);
 
+app.get('/check', (req, res) => {
+  res.send(`<h2>Server is working!</h2>`)
+})
+
+
 app.use("/auth", authRoutes);
 app.use("/companies", companiesRoutes);
 app.use("/users", usersRoutes);
@@ -31,6 +36,7 @@ app.use("/jobs", jobsRoutes);
 app.use(function (req, res, next) {
   return next(new NotFoundError());
 });
+
 
 /** Generic error handler; anything unhandled goes here. */
 app.use(function (err, req, res, next) {
